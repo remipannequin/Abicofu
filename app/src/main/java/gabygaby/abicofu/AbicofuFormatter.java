@@ -2,34 +2,37 @@ package gabygaby.abicofu;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Stack;
 
 /**
- * Created by remi on 04/07/15.
+ * Write a number as an Abicofu text
+ *
+ * Created by Rémi Pannequin on 04/07/15.
  */
-public class Abicofu {
+public class AbicofuFormatter {
 
 
     private final long number;
-    String ZERO = "zero";
-    String[] NAMES = {"", "b", "c", "d", "f", "g", "h", "k"};
+    static String ZERO = "zero";
+    static String[] NAMES = {"", "b", "c", "d", "f", "g", "h", "k"};
 
-    String LETTER_ODD = "a";
-    String[] LETTERS = new String[]{"", "i", "o", "u"};
-    String LETTER_OTHER = "e";
+    static String LETTER_ODD = "a";
+    static String[] LETTERS = new String[]{"", "i", "o", "u"};
+    static String LETTER_OTHER = "e";
 
-    String MULT_MINOR = "tet";
-    String SEP_MINOR = "-";
-    String MULT_MAJOR = "ct";
-    String SEP_MAJOR = " ";
+    static String MULT_MINOR = "tet";
+    static String SEP_MINOR = "-";
+    static String MULT_MAJOR = "ct";
+    static String SEP_MAJOR = " ";
 
 
-    public Abicofu(long n) {
+    public AbicofuFormatter(long n) {
         this.number = n;
     }
 
 
-    public String write_octet(int n) {
-
+    public static String write_octet(int n) {
+        if (n == 0) return ZERO;
         //extracts digits
         int minor = n % 16;
         int major = (n - minor) / 16;
@@ -45,17 +48,18 @@ public class Abicofu {
     }
 
 
-    private String write_digit(int d) {
+    public static String write_digit(int d) {
+        if (d == 0) return ZERO;
         int even = d - d % 2;
         StringBuilder result = new StringBuilder();
         result.append(NAMES[even / 2]);
         int p = 0;
-        while (Math.pow(2,p) <= d) {
+        while (Math.pow(2,p) < even) {
             p++;
         }
-        if (Math.pow(2,p) < d){
+        if (even == 0 || Math.pow(2,p) == even){
             result.append(LETTERS[p]);
-        } else{
+        } else {
             result.append(LETTER_OTHER);
         }
         if (d % 2 == 1) {
@@ -71,19 +75,22 @@ public class Abicofu {
         if (tmp == 0) {
             return ZERO;
         }
-        List<String> oct_names = new ArrayList();
+        List<String> oct_names = new ArrayList<>();
         while (tmp != 0) {
             //extract leftmost octet
             int o = (int)(tmp % 256);
-            oct_names.add(write_octet(o));
+            oct_names.add(0, write_octet(o));
             tmp -= o;
             tmp /= 256;
         }
         StringBuilder result = new StringBuilder();
-        result.append(oct_names.get(0));
+
         int n = oct_names.size();
         for (String oct : oct_names) {
-            result.append(oct).append(SEP_MAJOR).append(write_octet(n)).append(MULT_MAJOR);
+            result.append(oct);
+            if (n != 1) {
+                result.append(SEP_MAJOR).append(write_octet(n-1)).append(MULT_MAJOR).append(", ");
+            }
             n--;
         }
         return result.toString();
