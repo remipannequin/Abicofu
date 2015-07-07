@@ -84,11 +84,19 @@ public class AbicofuFormatter {
         }
         StringBuilder result = new StringBuilder();
 
+        boolean join = false;
         int n = oct_names.size();
         for (String oct : oct_names) {
-            result.append(oct);
-            if (n != 1) {
-                result.append(SEP_MAJOR).append(write_octet(n-1)).append(MULT_MAJOR).append(", ");
+            if (! oct.contentEquals(ZERO)) {
+                if (join) {
+                    result.append(", ");
+                    join = false;
+                }
+                result.append(oct);
+                if (n != 1) {
+                    result.append(SEP_MAJOR).append(write_octet(n - 1)).append(MULT_MAJOR);
+                    join = true;
+                }
             }
             n--;
         }

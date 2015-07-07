@@ -69,4 +69,11 @@ public class AbicofuFormatterTest extends TestCase {
     }
 
 
+    public void testWrite4()  throws Exception {
+        String expected = "atet biact";
+        long test = 0x10000000L;
+        AbicofuFormatter instance = new AbicofuFormatter(test);
+        assertEquals("testing write ", expected, instance.write());
+    }
+
 }

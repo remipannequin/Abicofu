@@ -56,7 +56,7 @@ public class MainActivity extends Activity {
 
     private void update() {
         StringBuilder hex_representation = new StringBuilder(String.format("%08X", number));
-        for (int i = hex_representation.length(); i >= 0; i = i - 2) {
+        for (int i = hex_representation.length() - 2; i >= 2; i = i - 2) {
             hex_representation.insert(i, " ");
         }
         TextView tv1 = (TextView) findViewById(R.id.textViewResultAbicofu);
