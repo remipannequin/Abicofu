@@ -2,7 +2,6 @@ package gabygaby.abicofu;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Stack;
 
 /**
  * Write a number as an Abicofu text
@@ -13,17 +12,17 @@ public class AbicofuFormatter {
 
 
     private final long number;
-    static String ZERO = "zero";
-    static String[] NAMES = {"", "b", "c", "d", "f", "g", "h", "k"};
+    private static final String ZERO = "zero";
+    private static final String[] NAMES = {"", "b", "c", "d", "f", "g", "h", "k"};
 
-    static String LETTER_ODD = "a";
-    static String[] LETTERS = new String[]{"", "i", "o", "u"};
-    static String LETTER_OTHER = "e";
+    private static final String LETTER_ODD = "a";
+    private static final String[] LETTERS = new String[]{"", "i", "o", "u"};
+    private static final String LETTER_OTHER = "e";
 
-    static String MULT_MINOR = "tet";
-    static String SEP_MINOR = "-";
-    static String MULT_MAJOR = "ct";
-    static String SEP_MAJOR = " ";
+    private static final String MULT_MINOR = "tet";
+    private static final String SEP_MINOR = "-";
+    private static final String MULT_MAJOR = "ct";
+    private static final String SEP_MAJOR = " ";
 
 
     public AbicofuFormatter(long n) {

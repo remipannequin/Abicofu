@@ -30,12 +30,12 @@
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:gravity="end"
-            android:text="@string/litteral_zero"
+            android:text="@string/zero_text"
             android:textAppearance="?android:attr/textAppearanceSmall"
             android:textStyle="italic" />
 
         <TextView
-            android:id="@+id/textViewResultHexa"
+            android:id="@+id/textViewResultHex"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:gravity="end"

@@ -1,17 +1,15 @@
 package gabygaby.abicofu;
 
+import android.app.Activity;
 import android.graphics.Typeface;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends Activity {
 
-    long number = 0;
+    private long number = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,7 +40,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     /**
-     * Add a figure to the nuber displayed
+     * Add a figure to the number displayed
      * @param c the char to append
      */
     private void addFigure(int c) {
@@ -57,42 +55,19 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void update() {
-        StringBuilder hex_repr = new StringBuilder(String.format("%08X", number));
-        for (int i = hex_repr.length(); i >= 0; i = i-2){
-            hex_repr.insert(i, " ");
+        StringBuilder hex_representation = new StringBuilder(String.format("%08X", number));
+        for (int i = hex_representation.length(); i >= 0; i = i - 2) {
+            hex_representation.insert(i, " ");
         }
         TextView tv1 = (TextView) findViewById(R.id.textViewResultAbicofu);
-        tv1.setText(hex_repr);
-        TextView tv3 = (TextView) findViewById(R.id.textViewResultHexa);
-        tv3.setText(hex_repr);
+        tv1.setText(hex_representation);
+        TextView tv3 = (TextView) findViewById(R.id.textViewResultHex);
+        tv3.setText(hex_representation);
 
-        String text_repr = new AbicofuFormatter(number).write();
+        String text_representation = new AbicofuFormatter(number).write();
         TextView tv2 = (TextView) findViewById(R.id.textViewResultText);
-        tv2.setText(text_repr);
+        tv2.setText(text_representation);
 
 
     }
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_main, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
-        }
-
-        return super.onOptionsItemSelected(item);
-    }
-
 }

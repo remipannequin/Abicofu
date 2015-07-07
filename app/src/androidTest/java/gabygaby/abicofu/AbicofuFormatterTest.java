@@ -8,7 +8,9 @@ import junit.framework.TestCase;
 
 
 /**
- * Created by remi on 06/07/15.
+ * Tests for AbicofuFormatter
+ *
+ * Created by Rémi Pannequin on 06/07/15.
  */
 public class AbicofuFormatterTest extends TestCase {
 
